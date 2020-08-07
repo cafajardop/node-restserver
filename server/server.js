@@ -2,11 +2,11 @@ require('./config/config')
 
 const express = require('express')
 const app = express();
+
 var bodyParser = require('body-parser');
 const { response } = require('express');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-
 // parse application/json
 app.use(bodyParser.json())
 
@@ -14,7 +14,6 @@ app.use(bodyParser.json())
 app.get('/usuario', function (req, res) {
     res.json('get Usuarios')
 });
-
 
 app.post('/usuario', function (req, res) {
     let body = req.body;
@@ -43,6 +42,6 @@ app.delete('/usuario', function (req, res) {
     res.json('delete Usuario')
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto: ', process.env.PORT);
 })
