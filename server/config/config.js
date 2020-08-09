@@ -19,4 +19,3 @@ let urlDB;
 /* } */
 
 process.env.URLDB = urlDB;
-

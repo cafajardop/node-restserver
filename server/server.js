@@ -44,5 +44,10 @@ git push heroku master */
 // TODO Actualizar npm => npm update  => Desistalar paquetes npm uninstall bcrypt
 
 
+// Ocultar la contraseña expuesta en github y heroku ejecutamos el comando => heroku config
+// heroku config: set MONGO_URI => ME CREA UNA VARIABLE DE ENTORNO Y LA OCULTA 
+// heroku config: unset <variable> => me borra la variable por si me equivoco
+
+
 
 
