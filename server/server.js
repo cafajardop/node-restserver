@@ -47,7 +47,7 @@ git push heroku master */
 // Ocultar la contraseña expuesta en github y heroku ejecutamos el comando => heroku config
 // heroku config: set MONGO_URI => ME CREA UNA VARIABLE DE ENTORNO Y LA OCULTA 
 // heroku config: unset <variable> => me borra la variable por si me equivoco
-
+// heroku config: set MONGO_URI = "Pego la variable de entorno de produccion para que no se vea la clave debe ser toda la url llamada urlDB"
 
 
 
