@@ -13,9 +13,8 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-
-// Importamos el usuario
-app.use(require('./routes/usuario'));
+// Configuracion Global de rutas
+app.use(require('./routes/index'));
 
 // Conectarnos a la base de datos mongoose
 mongoose.connect( process.env.URLDB,
