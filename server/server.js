@@ -3,6 +3,8 @@ require('./config/config');
 const express = require('express');
 // Conectarme a mongose hacemos la instalacion npm install mongoose --save
 const mongoose = require('mongoose');
+// Para leer el index y la carpta publica es un paquete de node por defecto
+const path = require('path');
 
 const app = express();
 
@@ -15,6 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 // Configuracion Global de rutas
 app.use(require('./routes/index'));
+
+// Habilitar la carpeta public Index para que pueda ser accedida 
+app.use( express.static(path.resolve(__dirname , '../public'))) //TODO Importar el path en la parte de arriba const path = require('path');
+
 
 // Conectarnos a la base de datos mongoose
 mongoose.connect( process.env.URLDB,

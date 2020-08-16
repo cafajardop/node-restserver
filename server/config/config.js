@@ -30,8 +30,12 @@ if( process.env.NODE_ENV === 'dev'){
 }else { 
     urlDB = process.env.MONGO_URI;
 }
-
 process.env.URLDB = urlDB;
+
+// ============================
+//  TODO Tercer paso GOOGLE CLIEN SING-IN GOOGLE
+// ============================
+process.env.CLIENT_ID = process.env.CLIENT_ID ||'341949644300-3r0og20a8703omkemgf3u38hibqaieu2.apps.googleusercontent.com'  
 
 
 /* TODO COMO CREAR UNA VARIABLE DE ENTORNO */
