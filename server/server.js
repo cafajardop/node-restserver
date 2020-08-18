@@ -19,19 +19,19 @@ app.use(bodyParser.json())
 app.use(require('./routes/index'));
 
 // Habilitar la carpeta public Index para que pueda ser accedida 
-app.use( express.static(path.resolve(__dirname , '../public'))) //TODO Importar el path en la parte de arriba const path = require('path');
+app.use(express.static(path.resolve(__dirname, '../public'))) //TODO Importar el path en la parte de arriba const path = require('path');
 
 
 // Conectarnos a la base de datos mongoose
-mongoose.connect( process.env.URLDB,
-                { useNewUrlParser: true, useCreateIndex: true},/*  Configuraciones para conectarme a mi base de datos externa */
-                (err, res) =>{
-    //Si recibo un error hago un throw err
-    if ( err ) throw err;
+mongoose.connect(process.env.URLDB,
+    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },/*  Configuraciones para conectarme a mi base de datos externa */
+    (err, res) => {
+        //Si recibo un error hago un throw err
+        if (err) throw err;
 
-    //Caso contrario Base de datos online
-    console.log('Base de datos ONLINE');
-})
+        //Caso contrario Base de datos online
+        console.log('Base de datos ONLINE');
+    })
 
 
 // Escuchando el puerto de express y la variable la colocamos despues del listen que se encuentra en la carpeta config.js
