@@ -23,8 +23,7 @@ app.use(express.static(path.resolve(__dirname, '../public'))) //TODO Importar el
 
 
 // Conectarnos a la base de datos mongoose
-mongoose.connect(process.env.URLDB,
-    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },/*  Configuraciones para conectarme a mi base de datos externa */
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },/*  Configuraciones para conectarme a mi base de datos externa */
     (err, res) => {
         //Si recibo un error hago un throw err
         if (err) throw err;

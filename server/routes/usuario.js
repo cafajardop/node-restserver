@@ -31,7 +31,7 @@ app.get('/usuario', verificaToken, (req, res) => {
             }
 
             /* Podemos contar registros con la funcion count */
-            Usuario.count({ estado: true }, (err, conteo) => {
+            Usuario.countDocuments({ estado: true }, (err, conteo) => {
 
                 res.json({
                     ok: true,
