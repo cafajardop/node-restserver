@@ -32,7 +32,7 @@ let verificaToken = (req,res,next) =>{
         req.usuario = decoded.usuario; /* Dentro del objeto viene el usuario por eso lo colocamos */
         next(); /* Llamamos en el next dentro de la verificaToken por que si se hace por fuera siempre va a pasar */
 
-    }) 
+    }); 
 
 
     /* console.log(token); */
@@ -59,7 +59,29 @@ let verificaAdmin_Role = (req, res, next) => {
     }
 };
 
+// ==========================
+// Verifica token para imagen
+// ==========================
+let verificaTokenImg = (req, res, next)=>{
+
+    let token = req.query.token;
+    jwt.verify(token, process.env.SEED,(err, decoded)=>{/* Pide 3 cosas el token luego el SEED y un callback decode */
+        if(err){
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'Token no válido'
+                }
+            })
+        }
+
+        req.usuario = decoded.usuario; /* Dentro del objeto viene el usuario por eso lo colocamos */
+        next(); /* Llamamos en el next dentro de la verificaToken por que si se hace por fuera siempre va a pasar */
+    });
+}
+
 module.exports = {
     verificaToken,
-    verificaAdmin_Role
+    verificaAdmin_Role,
+    verificaTokenImg
 }
