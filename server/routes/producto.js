@@ -49,10 +49,13 @@ app.get('/producto/:id', verificaToken, (req, res) => {
     let id = req.params.id;
 
     /* El metodo findbyid sirve para buscar por id de producto */
-    Producto.findById(id, (err, productoDB) => {
+    Producto.findById(id)
+        .populate('usuario','nombre email')
+        .populate('categoria','nombre')
+        .exec((err, productoDB) => {
         
         if (err) {
-            return res.status(400).json({
+            return res.status(500).json({
                 ok: false,
                 err
             })
@@ -73,8 +76,30 @@ app.get('/producto/:id', verificaToken, (req, res) => {
         })
 
     });
-
 });
+
+//Recibir por un parametro de busqueda que envie el usuario
+app.get('/producto/buscar/:termino',verificaToken, (req,res)=>{
+
+    let termino = req.params.termino;
+    let regex = new RegExp(termino,'i'); /* Creo la expresion regular pero le envio la i para que sea sensible a las mayusculas y minusculas */
+
+    Producto.find({ nombre:regex})
+        .populate('categoria','nombre')
+        .exec((err,productoDB)=>{
+            if(err){
+                return res.status(500).json({
+                    ok: false,
+                    err
+                })
+            }
+
+            res.json({
+                ok:true,
+                productoDB
+            })
+        })
+})
 
 /* Crear nueva producto */
 app.post('/producto', verificaToken, (req, res) => {
@@ -114,7 +139,7 @@ app.post('/producto', verificaToken, (req, res) => {
     });
 });
 
-/* Crear nuevo producto */
+/* Actualizar producto */
 app.put('/producto/:id', verificaToken, (req, res) => {
     let id = req.params.id;
     let body = req.body;
@@ -124,6 +149,7 @@ app.put('/producto/:id', verificaToken, (req, res) => {
         precioUni: body.precioUni,
         disponible: body.disponible
     };
+    console.log(req.params);
 
     Producto.findByIdAndUpdate(id, descProducto, { new: true, runValidators: true }, (err, productoDB) => {
 
@@ -138,7 +164,7 @@ app.put('/producto/:id', verificaToken, (req, res) => {
         if (!productoDB) {
             return res.status(400).json({
                 ok: false,
-                err
+                message: 'Id invalido'
             })
         }
 
